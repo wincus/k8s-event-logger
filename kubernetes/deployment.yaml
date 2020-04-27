@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-event-logger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: k8s-event-logger-pod
+  template:
+    metadata:
+      labels:
+        name: k8s-event-logger-pod
+    spec:
+      serviceAccountName: k8s-event-logger-service-account
+      containers:
+      - name: k8s-event-logger-con 
+        image: wincus/k8s-event-logger:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30

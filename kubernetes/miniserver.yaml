@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miniserver
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: miniserver-pod
+  template:
+    metadata:
+      labels:
+        name: miniserver-pod
+    spec:
+      containers:
+      - name: miniserver-con 
+        image: wincus/miniserver:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
