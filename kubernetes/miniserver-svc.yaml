@@ -4,7 +4,7 @@ metadata:
   name: miniserver-svc
 spec:
   selector:
-    name: miniserver 
+    name: miniserver-pod
   ports:
     - protocol: TCP
       port: 80
